@@ -55,14 +55,14 @@ export default function AttendanceScreen() {
         name: "attendance.jpg",
       } as any);
 
-      await axios.post("http://your-server-address:5000/attendance", formData, {
+      await axios.post("https://dailycheck.vercel.app/api/attendance", formData, {
         headers: { "Content-Type": "multipart/form-data" },
       });
 
       Alert.alert("Success", "Attendance marked successfully!");
       setAttendanceMarked(true);
-    } catch (error) {
-      console.error(error);
+    } catch (error: any) {
+      console.error(error.message);
       Alert.alert("Error", "Failed to mark attendance");
     }
   };
