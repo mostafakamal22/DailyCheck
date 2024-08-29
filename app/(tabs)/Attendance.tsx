@@ -55,9 +55,13 @@ export default function AttendanceScreen() {
         name: "attendance.jpg",
       } as any);
 
-      await axios.post("https://dailycheck.vercel.app/api/attendance", formData, {
-        headers: { "Content-Type": "multipart/form-data" },
-      });
+      await axios.post(
+        "https://dailycheck.vercel.app/api/attendance",
+        formData,
+        {
+          headers: { "Content-Type": "multipart/form-data" },
+        }
+      );
 
       Alert.alert("Success", "Attendance marked successfully!");
       setAttendanceMarked(true);
