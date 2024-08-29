@@ -1,9 +1,10 @@
 {
   "name": "backend",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "./build/app.js",
   "scripts": {
-    "start": "npx nodemon",
+    "start": "node ./build/app.js",
+    "dev": "npx nodemon",
     "build": "rimraf ./build && npx tsc"
   },
   "keywords": [],

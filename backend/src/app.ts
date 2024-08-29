@@ -9,6 +9,10 @@ dotenv.config();
 const app = express();
 app.use(bodyParser.json());
 
+app.get("/", (req, res) => {
+  res.send("Hello World");
+});
+
 app.use("/api", attendanceRoutes);
 
 //Connect to mongodb
