@@ -1,9 +1,9 @@
 {
   "name": "backend",
   "version": "1.0.0",
-  "main": "./build/app.js",
+  "main": "index.js",
   "scripts": {
-    "start": "node ./build/app.js",
+    "start": "node ./build/index.js",
     "dev": "npx nodemon",
     "build": "rimraf ./build && npx tsc"
   },
