@@ -15,9 +15,12 @@ app.get("/", (req, res) => {
 
 app.use("/api", attendanceRoutes);
 
+const PORT = process.env.PORT || 5000;
+const HOST = process.env.LOCAL_HOST;
+
 //Connect to mongodb
 connectToMongoose().then(() => {
-  app.listen(process.env.PORT || 5000, () => {
-    console.log("server is running");
+  app.listen(+PORT, HOST, () => {
+    console.log(`Server is running on http://${HOST}:${PORT}`);
   });
 });

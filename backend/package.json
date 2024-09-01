@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon api/index.ts",
+    "start": "nodemon",
     "build": "rimraf ./build && npx tsc",
     "ts.check": "npx tsc --project tsconfig.json",
     "add-build": "git add build"
