@@ -1,16 +1,17 @@
 {
   "compilerOptions": {
-    "target": "es5",
-    "module": "CommonJS",
-    "lib": ["es6"],
-    "allowJs": true,
-    "outDir": "build",
-    "rootDir": "api",
-    "strict": true,
-    "noImplicitAny": true,
+    "module": "commonjs",
     "esModuleInterop": true,
-    "moduleResolution": "node"
+    "allowSyntheticDefaultImports": true,
+    "target": "es6",
+    "noImplicitAny": true,
+    "moduleResolution": "node",
+    "sourceMap": true,
+    "outDir": "build",
+    "baseUrl": ".",
+    "paths": {
+      "*": ["node_modules/*", "api/types/*"]
+    }
   },
-  "include": ["api/**/*"],
-  "exclude": ["node_modules", "build/**/*"]
+  "include": ["./api/**/*"]
 }
