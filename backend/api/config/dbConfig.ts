@@ -34,6 +34,7 @@ export const connectToMongoose = async () => {
   //Error After First inialize State
   connection.on("error", () => {
     console.log("MongoDB Connection Error!");
+    process.exit(1);
   });
 
   //Open Connection to MongoDB

@@ -3,6 +3,7 @@ import bodyParser from "body-parser";
 import dotenv from "dotenv";
 import attendanceRoutes from "./routes/attendanceRoutes";
 import { connectToMongoose } from "./config/dbConfig";
+import { authMiddleware } from "./middlewares/auth";
 
 dotenv.config();
 
@@ -10,7 +11,11 @@ const app = express();
 app.use(bodyParser.json());
 
 app.get("/", (req, res) => {
-  res.send("Hello World");
+  res.send("DailyCheck API is running...");
+});
+
+app.get("/protected-route", authMiddleware, (_req, res) => {
+  res.json({ msg: "You have access to this route" });
 });
 
 app.use("/api", attendanceRoutes);

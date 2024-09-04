@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
-import Attendance from "../models/attendanceModel";
-import { uploadFile } from "../services/s3Service";
+import Attendance from "../models/Attendance";
+import { uploadImageToS3 } from "../services/s3Service";
 
 export const submitAttendance = async (req: Request, res: Response) => {
   try {
@@ -11,16 +11,15 @@ export const submitAttendance = async (req: Request, res: Response) => {
       return res.status(400).send("No file uploaded.");
     }
 
-    const imageUrl = await uploadFile(
+    const imageUrl = await uploadImageToS3(
       attendanceImage.buffer,
-      `attendance/${employeeId}/${Date.now()}.jpg`,
       attendanceImage.mimetype
     );
 
     const attendance = new Attendance({
       employeeId,
       date: new Date(),
-      attendanceImage: imageUrl.Location,
+      attendanceImage: imageUrl,
       location: { latitude, longitude },
     });
 
