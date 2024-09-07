@@ -5,7 +5,7 @@ const { query } = require("express-validator");
 const router = Router();
 
 router.post(
-  "/auth/register",
+  "/register",
   [
     query("email", "Please include a valid email").isEmail(),
     query("password", "Password must be 6 or more characters").isLength({
@@ -16,7 +16,7 @@ router.post(
 );
 
 router.post(
-  "/auth/login",
+  "/login",
   [
     query("email", "Please include a valid email").isEmail(),
     query("password", "Password is required").exists(),

@@ -1,10 +1,11 @@
 import { Router } from "express";
 import multer from "multer";
-import { submitAttendance } from "../controllers/attendanceController";
+import { checkIn, checkOut } from "../controllers/attendanceController";
 
 const router = Router();
 const upload = multer();
 
-router.post("/attendance", upload.single("image"), submitAttendance);
+router.post("/check-in", upload.single("faceImage"), checkIn);
+router.post("/check-out", upload.single("faceImage"), checkOut);
 
 export default router;

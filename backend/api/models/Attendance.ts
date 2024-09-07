@@ -1,28 +1,28 @@
-import mongoose, { Schema, Document, Model } from "mongoose";
+import mongoose, { Schema, Document } from "mongoose";
 
-export interface IAttendance extends Document {
-  employeeID: string;
-  facePicUrl: string;
-  time: Date;
-  location: {
-    latitude: number;
-    longitude: number;
-  };
+export interface IAttendanceRecord extends Document {
+  employeeId: string;
+  type: "check-in" | "check-out";
+  faceImageUrl: string;
+  location: string;
+  timestamp: Date;
 }
 
-const AttendanceSchema: Schema = new Schema({
-  employeeID: { type: String, required: true },
-  facePicUrl: { type: String, required: true },
-  time: { type: Date, required: true },
-  location: {
-    latitude: { type: Number, required: true },
-    longitude: { type: Number, required: true },
+const AttendanceRecordSchema: Schema = new Schema(
+  {
+    employeeId: { type: String, required: true },
+    type: { type: String, enum: ["check-in", "check-out"], required: true },
+    faceImageUrl: { type: String, required: true },
+    location: { type: String, required: true },
+    timestamp: { type: Date, default: Date.now },
   },
-});
-
-const Attendance: Model<IAttendance> = mongoose.model<IAttendance>(
-  "Attendance",
-  AttendanceSchema
+  {
+    timestamps: true,
+  }
 );
 
-export default Attendance;
+const AttendanceRecord = mongoose.model<IAttendanceRecord>(
+  "AttendanceRecord",
+  AttendanceRecordSchema
+);
+export default AttendanceRecord;
