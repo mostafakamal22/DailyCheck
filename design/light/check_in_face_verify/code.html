@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>WorkSync | Face Verification</title>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Google Fonts: Inter -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Design System Configuration -->
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "tertiary": "#7b2600",
+                    "surface-container-lowest": "#ffffff",
+                    "surface-tint": "#0c56d0",
+                    "on-surface": "#191c1e",
+                    "on-primary": "#ffffff",
+                    "on-secondary-container": "#576377",
+                    "primary-fixed": "#dae2ff",
+                    "secondary-fixed": "#d7e3fb",
+                    "secondary-container": "#d4e0f8",
+                    "inverse-on-surface": "#f0f1f3",
+                    "inverse-primary": "#b2c5ff",
+                    "on-error": "#ffffff",
+                    "on-background": "#191c1e",
+                    "primary": "#003d9b",
+                    "on-secondary-fixed": "#101c2d",
+                    "error": "#ba1a1a",
+                    "on-tertiary-fixed": "#380d00",
+                    "tertiary-fixed": "#ffdbcf",
+                    "primary-container": "#0052cc",
+                    "on-secondary": "#ffffff",
+                    "tertiary-container": "#a33500",
+                    "on-primary-container": "#c4d2ff",
+                    "secondary-fixed-dim": "#bbc7de",
+                    "on-primary-fixed": "#001848",
+                    "surface-container-low": "#f3f4f6",
+                    "surface-bright": "#f8f9fb",
+                    "on-secondary-fixed-variant": "#3b475b",
+                    "on-tertiary": "#ffffff",
+                    "primary-fixed-dim": "#b2c5ff",
+                    "surface-container-high": "#e7e8ea",
+                    "surface-container-highest": "#e1e2e4",
+                    "surface": "#f8f9fb",
+                    "inverse-surface": "#2e3132",
+                    "error-container": "#ffdad6",
+                    "on-tertiary-container": "#ffc6b2",
+                    "on-surface-variant": "#434654",
+                    "secondary": "#535f73",
+                    "on-primary-fixed-variant": "#0040a2",
+                    "on-tertiary-fixed-variant": "#812800",
+                    "background": "#f8f9fb",
+                    "tertiary-fixed-dim": "#ffb59b",
+                    "surface-variant": "#e1e2e4",
+                    "outline": "#737685",
+                    "surface-container": "#edeef0",
+                    "on-error-container": "#93000a",
+                    "surface-dim": "#d9dadc",
+                    "outline-variant": "#c3c6d6"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "base": "4px",
+                    "margin-desktop": "48px",
+                    "gutter": "16px",
+                    "lg": "24px",
+                    "xl": "32px",
+                    "md": "16px",
+                    "sm": "8px",
+                    "xs": "4px",
+                    "margin-mobile": "16px"
+            },
+            "fontFamily": {
+                    "headline-lg": ["Inter"],
+                    "label-md": ["Inter"],
+                    "headline-lg-mobile": ["Inter"],
+                    "code-sm": ["Inter"],
+                    "body-md": ["Inter"],
+                    "body-lg": ["Inter"],
+                    "headline-md": ["Inter"]
+            },
+            "fontSize": {
+                    "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                    "label-md": ["12px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                    "headline-lg-mobile": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+                    "code-sm": ["12px", { "lineHeight": "16px", "fontWeight": "500" }],
+                    "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                    "body-lg": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                    "headline-md": ["20px", { "lineHeight": "28px", "fontWeight": "600" }]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        
+        /* Face Frame Animation */
+        @keyframes pulse-border {
+            0% { border-color: rgba(0, 61, 155, 0.4); }
+            50% { border-color: rgba(0, 61, 155, 1); }
+            100% { border-color: rgba(0, 61, 155, 0.4); }
+        }
+        .face-frame {
+            border: 4px solid #003d9b;
+            animation: pulse-border 2s infinite ease-in-out;
+        }
+        .face-detected {
+            border-color: #0c56d0 !important;
+            box-shadow: 0 0 20px rgba(12, 86, 208, 0.4);
+            animation: none !important;
+        }
+        
+        /* Scanning line effect */
+        @keyframes scan {
+            0% { transform: translateY(0); opacity: 0; }
+            50% { opacity: 0.8; }
+            100% { transform: translateY(100%); opacity: 0; }
+        }
+        .scan-line {
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #0c56d0, transparent);
+            position: absolute;
+            width: 100%;
+            top: 0;
+            animation: scan 3s infinite linear;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-surface font-body-md overflow-hidden">
+<!-- Top App Bar -->
+<header class="fixed top-0 w-full z-50 backdrop-blur-xl bg-surface/80 shadow-sm">
+<div class="flex justify-between items-center h-16 px-margin-mobile md:px-margin-desktop max-w-7xl mx-auto">
+<div class="flex items-center gap-md">
+<button class="flex items-center justify-center w-10 h-10 rounded-full hover:bg-surface-container-high/50 transition-colors active:scale-[0.97]">
+<span class="material-symbols-outlined text-primary">arrow_back</span>
+</button>
+<span class="text-headline-md font-headline-md font-bold text-primary">WorkSync</span>
+</div>
+<div class="flex items-center gap-sm">
+<div class="hidden md:block text-right">
+<p class="font-label-md text-label-md text-on-surface">Alex Rivera</p>
+<p class="text-xs text-on-surface-variant">Front-end Developer</p>
+</div>
+<div class="w-10 h-10 rounded-full bg-primary-container/20 flex items-center justify-center overflow-hidden border border-outline-variant">
+<img class="w-full h-full object-cover" data-alt="A professional headshot of a young male employee with a warm expression, captured in high-resolution with soft studio lighting. The background is a clean, neutral gray to maintain the enterprise aesthetic. The lighting is balanced and crisp, emphasizing professional reliability and precision in an HR software environment." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBaWT0klkHfvY8gZaZbalF6aczNyUp2B9lOPFEAmrOTx_ECpAZYAm6zup5JMJTxtwc91qYuqRZStQUAkI_ztIVeeI0p6Ol0On_NgJYWWy_QIyuYjPHXgt64bj5i45cxrX753c789YoSLhoE24M3a-Wmw2wqfEQ8fCROgngXyMvYwBPdOQsDNa27mAdgUc93mWPWbXqOOVG4Xa-SlAt-De7UsLJrvwJv_XEeF6w5p2KmHhYWAoX3jYTj"/>
+</div>
+</div>
+</div>
+</header>
+<main class="relative h-screen pt-16 flex flex-col items-center justify-center bg-black">
+<!-- Live Camera Feed Simulation -->
+<div class="absolute inset-0 z-0 overflow-hidden">
+<div class="relative w-full h-full bg-neutral-900">
+<!-- Camera Feed Placeholder Background -->
+<div class="absolute inset-0 opacity-80" data-alt="A wide-angle, first-person perspective view of an office interior through a high-definition webcam lens. The scene is slightly desaturated with a subtle noise texture to simulate a live camera feed. In the center, there is a clear area for a person's face to be positioned, framed by soft ambient office lighting from windows and overhead fixtures. The mood is clinical and modern." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDTUSmLvC25ye4XIQXYtfwVw3GfTP6rqyFMwp2EMFTtVKyE5H_tSV6AZM4T8MNdB4_uO50eup6R1H4JKkn88nGXLFifgKuveFZ3-Otr1GU0GHExOCTdT9ZOsaEvQ09ZSHSqudn1yduPaLemMwMaJ1oW9M1HZYPtBrMTLwrTzaC_R4ZlzyteHPAdb00bcoGHm1rqDbEbuHmlgXcjcBlUL0xuCKz74V_xTGEXpQfce6HIP5_-B8Zvjm7l')">
+</div>
+<!-- Overlay Gradients for UI clarity -->
+<div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/30 pointer-events-none"></div>
+</div>
+</div>
+<!-- Face Detection Overlay Shell -->
+<div class="relative z-10 w-full max-w-lg px-margin-mobile flex flex-col items-center">
+<!-- Face Frame -->
+<div class="face-frame relative w-64 h-80 md:w-80 md:h-96 rounded-[60px] md:rounded-[80px] overflow-hidden transition-all duration-500" id="face-frame">
+<!-- Scanning Line -->
+<div class="scan-line" id="scan-line"></div>
+<!-- Corner Indicators -->
+<div class="absolute top-6 left-6 w-8 h-8 border-t-4 border-l-4 border-primary-fixed rounded-tl-xl opacity-50"></div>
+<div class="absolute top-6 right-6 w-8 h-8 border-t-4 border-r-4 border-primary-fixed rounded-tr-xl opacity-50"></div>
+<div class="absolute bottom-6 left-6 w-8 h-8 border-b-4 border-l-4 border-primary-fixed rounded-bl-xl opacity-50"></div>
+<div class="absolute bottom-6 right-6 w-8 h-8 border-b-4 border-r-4 border-primary-fixed rounded-br-xl opacity-50"></div>
+</div>
+<!-- UI Instructions -->
+<div class="mt-xl text-center">
+<div class="bg-black/40 backdrop-blur-md px-6 py-4 rounded-2xl border border-white/10 shadow-xl" id="status-container">
+<h1 class="text-white font-headline-md text-headline-md mb-xs" id="main-instruction">Place your face within the frame</h1>
+<p class="text-on-primary-container/80 text-body-md font-body-md" id="sub-instruction">Ensure your face is well-lit and clearly visible</p>
+<!-- Detection Progress Bar -->
+<div class="mt-md w-full bg-white/10 h-1.5 rounded-full overflow-hidden">
+<div class="w-1/4 h-full bg-primary-fixed transition-all duration-1000 ease-in-out" id="progress-bar"></div>
+</div>
+</div>
+</div>
+<!-- Action Buttons Container -->
+<div class="fixed bottom-margin-mobile md:bottom-lg left-0 right-0 z-20 flex justify-center gap-md px-margin-mobile">
+<button class="flex-1 max-w-[160px] h-12 bg-white/10 backdrop-blur-lg hover:bg-white/20 text-white font-semibold rounded-xl transition-all active:scale-[0.97] border border-white/20" id="retake-btn">
+                    Retake
+                </button>
+<button class="flex-1 max-w-[240px] h-12 bg-primary text-white font-semibold rounded-xl opacity-40 cursor-not-allowed transition-all flex items-center justify-center gap-sm shadow-lg" disabled="" id="capture-btn">
+<span class="material-symbols-outlined text-[20px]">photo_camera</span>
+                    Capture
+                </button>
+</div>
+</div>
+</main>
+<!-- Success Feedback Overlay (Hidden by default) -->
+<div class="fixed inset-0 z-[60] bg-primary flex flex-col items-center justify-center opacity-0 pointer-events-none transition-opacity duration-300" id="success-overlay">
+<div class="w-24 h-24 bg-white rounded-full flex items-center justify-center mb-lg scale-0 transition-transform duration-500 delay-200">
+<span class="material-symbols-outlined text-primary text-[64px]" style="font-variation-settings: 'wght' 600">check</span>
+</div>
+<h2 class="text-white font-headline-lg text-headline-lg mb-sm">Verification Complete</h2>
+<p class="text-on-primary-container text-body-lg">Clocking you in for Shift A...</p>
+</div>
+<!-- Interactive Micro-Interactions -->
+<script>
+        // Simulate Face Detection Logic
+        const faceFrame = document.getElementById('face-frame');
+        const progressBar = document.getElementById('progress-bar');
+        const captureBtn = document.getElementById('capture-btn');
+        const mainInstruction = document.getElementById('main-instruction');
+        const subInstruction = document.getElementById('sub-instruction');
+        const scanLine = document.getElementById('scan-line');
+        const statusContainer = document.getElementById('status-container');
+        const successOverlay = document.getElementById('success-overlay');
+
+        // State variables
+        let faceFound = false;
+
+        // Simulate successful detection after 2 seconds
+        setTimeout(() => {
+            faceFound = true;
+            faceFrame.classList.add('face-detected');
+            progressBar.style.width = '100%';
+            progressBar.classList.replace('bg-primary-fixed', 'bg-secondary-fixed');
+            
+            // Update UI
+            mainInstruction.innerText = "Face Detected";
+            mainInstruction.classList.add('text-secondary-fixed');
+            subInstruction.innerText = "Hold still to capture";
+            
+            // Enable Button
+            captureBtn.disabled = false;
+            captureBtn.classList.remove('opacity-40', 'cursor-not-allowed');
+            captureBtn.classList.add('active:scale-[0.97]', 'hover:bg-primary-container');
+            
+            // Animation haptic-like effect
+            statusContainer.style.transform = "scale(1.02)";
+            setTimeout(() => statusContainer.style.transform = "scale(1)", 150);
+        }, 2500);
+
+        // Interaction for Capture
+        captureBtn.addEventListener('click', () => {
+            if (!captureBtn.disabled) {
+                // Visual Flash Effect
+                const flash = document.createElement('div');
+                flash.className = 'fixed inset-0 bg-white z-[100] transition-opacity duration-300';
+                document.body.appendChild(flash);
+                
+                setTimeout(() => {
+                    flash.style.opacity = '0';
+                    setTimeout(() => flash.remove(), 300);
+                    
+                    // Show success overlay
+                    successOverlay.classList.remove('opacity-0', 'pointer-events-none');
+                    successOverlay.querySelector('div').classList.remove('scale-0');
+                    successOverlay.querySelector('div').classList.add('scale-100');
+                    
+                    // Navigate after delay
+                    setTimeout(() => {
+                        window.location.reload(); // Simulate routing back or to next step
+                    }, 2000);
+                }, 100);
+            }
+        });
+
+        // Retake resets state
+        document.getElementById('retake-btn').addEventListener('click', () => {
+            faceFound = false;
+            faceFrame.classList.remove('face-detected');
+            progressBar.style.width = '25%';
+            progressBar.classList.replace('bg-secondary-fixed', 'bg-primary-fixed');
+            mainInstruction.innerText = "Place your face within the frame";
+            mainInstruction.classList.remove('text-secondary-fixed');
+            subInstruction.innerText = "Ensure your face is well-lit and clearly visible";
+            captureBtn.disabled = true;
+            captureBtn.classList.add('opacity-40', 'cursor-not-allowed');
+            
+            // Restart timer logic
+            setTimeout(() => {
+                if(!faceFound) {
+                    // Logic repeats...
+                    location.reload();
+                }
+            }, 500);
+        });
+    </script>
+</body></html>

@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>WorkSync | Face Verification</title>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Google Fonts: Inter -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Design System Configuration -->
+<script id="tailwind-config">
+  tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        "colors": {
+                "surface-bright": "#363940",
+                "surface-container": "#1c2026",
+                "secondary-container": "#39485a",
+                "on-tertiary-container": "#4f2d00",
+                "primary-container": "#47a1ff",
+                "on-primary-fixed": "#001c38",
+                "tertiary": "#ffb868",
+                "primary-fixed-dim": "#a2c9ff",
+                "inverse-primary": "#0060a9",
+                "on-secondary-fixed": "#0d1c2d",
+                "tertiary-fixed-dim": "#ffb868",
+                "primary-fixed": "#d3e4ff",
+                "on-surface-variant": "#c0c7d4",
+                "surface-container-highest": "#31353b",
+                "surface-tint": "#a2c9ff",
+                "secondary": "#b9c8de",
+                "background": "#101419",
+                "on-tertiary-fixed-variant": "#673d00",
+                "on-error-container": "#ffdad6",
+                "surface-dim": "#101419",
+                "on-tertiary": "#482900",
+                "on-primary": "#00315b",
+                "surface-container-low": "#181c22",
+                "on-surface": "#e0e2ea",
+                "on-secondary": "#233143",
+                "secondary-fixed-dim": "#b9c8de",
+                "error-container": "#93000a",
+                "surface-container-lowest": "#0b0e14",
+                "on-error": "#690005",
+                "secondary-fixed": "#d4e4fa",
+                "surface-container-high": "#262a30",
+                "tertiary-fixed": "#ffddbb",
+                "on-primary-fixed-variant": "#004881",
+                "primary": "#a2c9ff",
+                "tertiary-container": "#e08a00",
+                "on-tertiary-fixed": "#2b1700",
+                "outline": "#8a919d",
+                "on-primary-container": "#003663",
+                "inverse-on-surface": "#2d3137",
+                "outline-variant": "#404752",
+                "surface": "#101419",
+                "on-secondary-fixed-variant": "#39485a",
+                "error": "#ffb4ab",
+                "inverse-surface": "#e0e2ea",
+                "surface-variant": "#31353b",
+                "on-secondary-container": "#a7b6cc",
+                "on-background": "#e0e2ea"
+        },
+        "borderRadius": {
+                "DEFAULT": "0.25rem",
+                "lg": "0.5rem",
+                "xl": "0.75rem",
+                "full": "9999px"
+        },
+        "spacing": {
+                "margin-desktop": "64px",
+                "gutter": "16px",
+                "unit": "8px",
+                "container-padding-md": "24px",
+                "container-padding-sm": "16px",
+                "margin-mobile": "16px"
+        },
+        "fontFamily": {
+                "body-md": ["Inter"],
+                "title-md": ["Inter"],
+                "headline-lg-mobile": ["Inter"],
+                "headline-lg": ["Inter"],
+                "label-sm": ["Inter"],
+                "display-lg": ["Inter"],
+                "body-lg": ["Inter"]
+        },
+        "fontSize": {
+                "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                "title-md": ["18px", { "lineHeight": "24px", "fontWeight": "600" }],
+                "headline-lg-mobile": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                "label-sm": ["12px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500" }],
+                "display-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                "body-lg": ["16px", { "lineHeight": "24px", "fontWeight": "400" }]
+        }
+      },
+    },
+  }
+</script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        
+        /* Face Frame Animation */
+        @keyframes pulse-border {
+            0% { border-color: rgba(162, 201, 255, 0.4); }
+            50% { border-color: rgba(162, 201, 255, 1); }
+            100% { border-color: rgba(162, 201, 255, 0.4); }
+        }
+        .face-frame {
+            border: 4px solid #a2c9ff;
+            animation: pulse-border 2s infinite ease-in-out;
+        }
+        .face-detected {
+            border-color: #a2c9ff !important;
+            box-shadow: 0 0 25px rgba(162, 201, 255, 0.5);
+            animation: none !important;
+        }
+        
+        /* Scanning line effect */
+        @keyframes scan {
+            0% { transform: translateY(0); opacity: 0; }
+            50% { opacity: 0.9; }
+            100% { transform: translateY(100%); opacity: 0; }
+        }
+        .scan-line {
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #a2c9ff, transparent);
+            position: absolute;
+            width: 100%;
+            top: 0;
+            animation: scan 3s infinite linear;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+</head>
+<body class="bg-background text-on-surface font-body-md overflow-hidden">
+<!-- Top App Bar -->
+<header class="fixed top-0 w-full z-50 backdrop-blur-xl bg-surface/80 border-b border-outline-variant/30">
+<div class="flex justify-between items-center h-16 px-margin-mobile md:px-margin-desktop max-w-7xl mx-auto">
+<div class="flex items-center gap-unit">
+<button class="flex items-center justify-center w-10 h-10 rounded-full hover:bg-surface-container-high transition-colors active:scale-[0.97]">
+<span class="material-symbols-outlined text-primary">arrow_back</span>
+</button>
+<span class="text-title-md font-title-md text-primary">WorkSync</span>
+</div>
+<div class="flex items-center gap-unit">
+<div class="hidden md:block text-right">
+<p class="text-body-md font-semibold text-on-surface">Alex Rivera</p>
+<p class="text-label-sm text-on-surface-variant">Front-end Developer</p>
+</div>
+<div class="w-10 h-10 rounded-full bg-secondary-container flex items-center justify-center overflow-hidden border border-outline-variant">
+<img alt="Alex Rivera Profile" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBaWT0klkHfvY8gZaZbalF6aczNyUp2B9lOPFEAmrOTx_ECpAZYAm6zup5JMJTxtwc91qYuqRZStQUAkI_ztIVeeI0p6Ol0On_NgJYWWy_QIyuYjPHXgt64bj5i45cxrX753c789YoSLhoE24M3a-Wmw2wqfEQ8fCROgngXyMvYwBPdOQsDNa27mAdgUc93mWPWbXqOOVG4Xa-SlAt-De7UsLJrvwJv_XEeF6w5p2KmHhYWAoX3jYTj"/>
+</div>
+</div>
+</div>
+</header>
+<main class="relative h-screen pt-16 flex flex-col items-center justify-center bg-black">
+<!-- Live Camera Feed Simulation -->
+<div class="absolute inset-0 z-0 overflow-hidden">
+<div class="relative w-full h-full bg-neutral-950">
+<!-- Camera Feed Placeholder Background -->
+<div class="absolute inset-0 opacity-60 grayscale-[0.3]" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDTUSmLvC25ye4XIQXYtfwVw3GfTP6rqyFMwp2EMFTtVKyE5H_tSV6AZM4T8MNdB4_uO50eup6R1H4JKkn88nGXLFifgKuveFZ3-Otr1GU0GHExOCTdT9ZOsaEvQ09ZSHSqudn1yduPaLemMwMaJ1oW9M1HZYPtBrMTLwrTzaC_R4ZlzyteHPAdb00bcoGHm1rqDbEbuHmlgXcjcBlUL0xuCKz74V_xTGEXpQfce6HIP5_-B8Zvjm7l'); background-size: cover; background-position: center;">
+</div>
+<!-- Overlay Gradients for UI clarity -->
+<div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-black/60 pointer-events-none"></div>
+</div>
+</div>
+<!-- Face Detection Overlay Shell -->
+<div class="relative z-10 w-full max-w-lg px-margin-mobile flex flex-col items-center">
+<!-- Face Frame -->
+<div class="face-frame relative w-64 h-80 md:w-80 md:h-96 rounded-[60px] md:rounded-[80px] overflow-hidden transition-all duration-500" id="face-frame">
+<!-- Scanning Line -->
+<div class="scan-line" id="scan-line"></div>
+<!-- Corner Indicators -->
+<div class="absolute top-6 left-6 w-8 h-8 border-t-4 border-l-4 border-primary-fixed-dim rounded-tl-xl opacity-80"></div>
+<div class="absolute top-6 right-6 w-8 h-8 border-t-4 border-r-4 border-primary-fixed-dim rounded-tr-xl opacity-80"></div>
+<div class="absolute bottom-6 left-6 w-8 h-8 border-b-4 border-l-4 border-primary-fixed-dim rounded-bl-xl opacity-80"></div>
+<div class="absolute bottom-6 right-6 w-8 h-8 border-b-4 border-r-4 border-primary-fixed-dim rounded-br-xl opacity-80"></div>
+</div>
+<!-- UI Instructions -->
+<div class="mt-xl text-center">
+<div class="bg-surface-container-low/60 backdrop-blur-xl px-6 py-4 rounded-2xl border border-outline-variant/30 shadow-2xl" id="status-container">
+<h1 class="text-on-surface font-title-md text-headline-lg-mobile mb-xs" id="main-instruction">Place your face within the frame</h1>
+<p class="text-on-surface-variant text-body-md" id="sub-instruction">Ensure your face is well-lit and clearly visible</p>
+<!-- Detection Progress Bar -->
+<div class="mt-container-padding-sm w-full bg-surface-container-highest h-1.5 rounded-full overflow-hidden">
+<div class="w-1/4 h-full bg-primary-fixed-dim transition-all duration-1000 ease-in-out" id="progress-bar"></div>
+</div>
+</div>
+</div>
+<!-- Action Buttons Container -->
+<div class="fixed bottom-margin-mobile md:bottom-margin-desktop left-0 right-0 z-20 flex justify-center gap-gutter px-margin-mobile">
+<button class="flex-1 max-w-[160px] h-12 bg-surface-container-high/40 backdrop-blur-lg hover:bg-surface-container-highest text-on-surface font-semibold rounded-xl transition-all active:scale-[0.97] border border-outline-variant/50" id="retake-btn">
+                    Retake
+                </button>
+<button class="flex-1 max-w-[240px] h-12 bg-primary text-on-primary font-semibold rounded-xl opacity-40 cursor-not-allowed transition-all flex items-center justify-center gap-unit shadow-lg shadow-primary/20" disabled="" id="capture-btn">
+<span class="material-symbols-outlined text-[20px]">photo_camera</span>
+                    Capture
+                </button>
+</div>
+</div>
+</main>
+<!-- Success Feedback Overlay -->
+<div class="fixed inset-0 z-[60] bg-background flex flex-col items-center justify-center opacity-0 pointer-events-none transition-opacity duration-300" id="success-overlay">
+<div class="w-24 h-24 bg-primary-container rounded-full flex items-center justify-center mb-container-padding-md scale-0 transition-transform duration-500 delay-200 shadow-xl shadow-primary/20">
+<span class="material-symbols-outlined text-on-primary-container text-[64px]" style="font-variation-settings: 'wght' 600">check</span>
+</div>
+<h2 class="text-on-surface font-headline-lg text-headline-lg mb-unit">Verification Complete</h2>
+<p class="text-on-surface-variant text-body-lg">Clocking you in for Shift A...</p>
+</div>
+<!-- Interactive Micro-Interactions -->
+<script>
+        // Simulate Face Detection Logic
+        const faceFrame = document.getElementById('face-frame');
+        const progressBar = document.getElementById('progress-bar');
+        const captureBtn = document.getElementById('capture-btn');
+        const mainInstruction = document.getElementById('main-instruction');
+        const subInstruction = document.getElementById('sub-instruction');
+        const scanLine = document.getElementById('scan-line');
+        const statusContainer = document.getElementById('status-container');
+        const successOverlay = document.getElementById('success-overlay');
+
+        // State variables
+        let faceFound = false;
+
+        // Simulate successful detection after 2.5 seconds
+        setTimeout(() => {
+            faceFound = true;
+            faceFrame.classList.add('face-detected');
+            progressBar.style.width = '100%';
+            progressBar.classList.replace('bg-primary-fixed-dim', 'bg-tertiary');
+            
+            // Update UI
+            mainInstruction.innerText = "Face Detected";
+            mainInstruction.classList.add('text-primary');
+            subInstruction.innerText = "Hold still to capture";
+            
+            // Enable Button
+            captureBtn.disabled = false;
+            captureBtn.classList.remove('opacity-40', 'cursor-not-allowed');
+            captureBtn.classList.add('active:scale-[0.97]', 'hover:bg-primary-fixed-dim', 'hover:text-on-primary-fixed');
+            
+            // Animation haptic-like effect
+            statusContainer.style.transform = "scale(1.02)";
+            setTimeout(() => statusContainer.style.transform = "scale(1)", 150);
+        }, 2500);
+
+        // Interaction for Capture
+        captureBtn.addEventListener('click', () => {
+            if (!captureBtn.disabled) {
+                // Visual Flash Effect
+                const flash = document.createElement('div');
+                flash.className = 'fixed inset-0 bg-white z-[100] transition-opacity duration-300';
+                document.body.appendChild(flash);
+                
+                setTimeout(() => {
+                    flash.style.opacity = '0';
+                    setTimeout(() => flash.remove(), 300);
+                    
+                    // Show success overlay
+                    successOverlay.classList.remove('opacity-0', 'pointer-events-none');
+                    successOverlay.querySelector('div').classList.remove('scale-0');
+                    successOverlay.querySelector('div').classList.add('scale-100');
+                    
+                    // Navigate after delay
+                    setTimeout(() => {
+                        window.location.reload(); // Simulate routing back or to next step
+                    }, 2000);
+                }, 100);
+            }
+        });
+
+        // Retake resets state
+        document.getElementById('retake-btn').addEventListener('click', () => {
+            faceFound = false;
+            faceFrame.classList.remove('face-detected');
+            progressBar.style.width = '25%';
+            progressBar.classList.replace('bg-tertiary', 'bg-primary-fixed-dim');
+            mainInstruction.innerText = "Place your face within the frame";
+            mainInstruction.classList.remove('text-primary');
+            subInstruction.innerText = "Ensure your face is well-lit and clearly visible";
+            captureBtn.disabled = true;
+            captureBtn.classList.add('opacity-40', 'cursor-not-allowed');
+            
+            // Short restart logic delay
+            setTimeout(() => {
+                if(!faceFound) {
+                    location.reload();
+                }
+            }, 500);
+        });
+    </script>
+</body></html>

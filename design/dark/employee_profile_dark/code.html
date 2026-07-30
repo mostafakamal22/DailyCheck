@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>WorkSync | Employee Profile</title>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-bright": "#363940",
+                        "surface-container": "#1c2026",
+                        "secondary-container": "#39485a",
+                        "on-tertiary-container": "#4f2d00",
+                        "primary-container": "#47a1ff",
+                        "on-primary-fixed": "#001c38",
+                        "tertiary": "#ffb868",
+                        "primary-fixed-dim": "#a2c9ff",
+                        "inverse-primary": "#0060a9",
+                        "on-secondary-fixed": "#0d1c2d",
+                        "tertiary-fixed-dim": "#ffb868",
+                        "primary-fixed": "#d3e4ff",
+                        "on-surface-variant": "#c0c7d4",
+                        "surface-container-highest": "#31353b",
+                        "surface-tint": "#a2c9ff",
+                        "secondary": "#b9c8de",
+                        "background": "#101419",
+                        "on-tertiary-fixed-variant": "#673d00",
+                        "on-error-container": "#ffdad6",
+                        "surface-dim": "#101419",
+                        "on-tertiary": "#482900",
+                        "on-primary": "#00315b",
+                        "surface-container-low": "#181c22",
+                        "on-surface": "#e0e2ea",
+                        "on-secondary": "#233143",
+                        "secondary-fixed-dim": "#b9c8de",
+                        "error-container": "#93000a",
+                        "surface-container-lowest": "#0b0e14",
+                        "on-error": "#690005",
+                        "secondary-fixed": "#d4e4fa",
+                        "surface-container-high": "#262a30",
+                        "tertiary-fixed": "#ffddbb",
+                        "on-primary-fixed-variant": "#004881",
+                        "primary": "#a2c9ff",
+                        "tertiary-container": "#e08a00",
+                        "on-tertiary-fixed": "#2b1700",
+                        "outline": "#8a919d",
+                        "on-primary-container": "#003663",
+                        "inverse-on-surface": "#2d3137",
+                        "outline-variant": "#404752",
+                        "surface": "#101419",
+                        "on-secondary-fixed-variant": "#39485a",
+                        "error": "#ffb4ab",
+                        "inverse-surface": "#e0e2ea",
+                        "surface-variant": "#31353b",
+                        "on-secondary-container": "#a7b6cc",
+                        "on-background": "#e0e2ea"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "margin-desktop": "64px",
+                        "gutter": "16px",
+                        "unit": "8px",
+                        "container-padding-md": "24px",
+                        "container-padding-sm": "16px",
+                        "margin-mobile": "16px"
+                    },
+                    "fontFamily": {
+                        "body-md": ["Inter"],
+                        "title-md": ["Inter"],
+                        "headline-lg-mobile": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "label-sm": ["Inter"],
+                        "display-lg": ["Inter"],
+                        "body-lg": ["Inter"]
+                    },
+                    "fontSize": {
+                        "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                        "title-md": ["18px", {"lineHeight": "24px", "fontWeight": "600"}],
+                        "headline-lg-mobile": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                        "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                        "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                        "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            display: inline-block;
+            vertical-align: middle;
+        }
+        .bg-glass {
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+        }
+        body {
+            background-color: #101419;
+            font-family: 'Inter', sans-serif;
+            min-height: max(884px, 100dvh);
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface antialiased">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 backdrop-blur-xl bg-surface/80 shadow-sm transition-all duration-300 border-b border-outline-variant/30">
+<div class="flex justify-between items-center h-16 px-margin-mobile md:px-margin-desktop max-w-7xl mx-auto">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full overflow-hidden bg-surface-container-highest">
+<img class="w-full h-full object-cover" data-alt="A high-quality professional portrait of a woman named Sarah Jenkins in a bright, modern corporate environment. She has a confident, friendly smile and is wearing professional attire. The lighting is soft and diffused, creating a premium enterprise aesthetic with clean white backgrounds and subtle blue accents characteristic of a high-end tech company profile." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDVce-FD0B6_he7-BJeGzA-PPEncA1S7a_8tn7ydmCL-W51VHMxN75hkb5CDjBNtcVjYEWmzq2nfYEUc6RqPmLepM2XUZ-y1xIKvpUKeUUoYr8EaoIucFID8mrsbolDCr1dCUtxd_FOmr2iy80vHyhLhUh2uaE4yyTyWm1JFW4U_SciC8Q8Icu1eYlJqqyWFE6XHW9VAYY7bsgVs8Bb3GbEL3HRJaYyG6odqOI5fWIpCLQKVcWKJQCM"/>
+</div>
+<h1 class="text-title-md font-bold text-primary">WorkSync</h1>
+</div>
+<button class="w-10 h-10 flex items-center justify-center rounded-full hover:bg-surface-container-high transition-colors active:scale-95 duration-150">
+<span class="material-symbols-outlined text-primary" data-icon="notifications">notifications</span>
+</button>
+</div>
+</header>
+<main class="pt-24 pb-32 px-margin-mobile md:px-margin-desktop max-w-7xl mx-auto">
+<!-- Profile Header Card -->
+<section class="mb-gutter">
+<div class="bg-surface-container-lowest rounded-xl p-6 shadow-sm border border-outline-variant flex flex-col items-center md:flex-row md:items-start gap-6 relative overflow-hidden">
+<!-- Decorative background element -->
+<div class="absolute top-0 right-0 w-32 h-32 bg-primary-container/10 rounded-bl-full pointer-events-none"></div>
+<!-- Large Avatar -->
+<div class="relative group">
+<div class="w-32 h-32 md:w-40 md:h-40 rounded-full border-4 border-surface-container-high shadow-lg overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="Close up studio portrait of Sarah Jenkins for an enterprise employee profile. She is a mid-30s professional with an approachable demeanor, wearing a navy blue blazer over a crisp white shirt. The background is a blurred office interior with soft natural light streaming in, maintaining a high-fidelity, clean corporate look with soft shadows and sharp focus on her face." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC5S4lxdXKxL54PxtiE7OWf2jhap0Jr9L9Z4jAzV9AVApVvy3DshBEQlJN3FPCViFxXzZoFX4961fLevthPbrWmOlVRM9oAavWMFXb-Q0g4XEPCYiE-drCLodAY0TBU8-T9DNcerjevRymk0XenA-wIDFpMXV-3Aqgzld9R-U4r-nUugxkUdmfJtbbJWujzvQmT0cKOVFhZ7zO6-z9Sh6cHwmgNz0kNkQFAUQ_h_gb5ZAwMShJRA1LP"/>
+</div>
+<button class="absolute bottom-1 right-1 bg-primary text-on-primary p-2 rounded-full shadow-md hover:scale-105 active:scale-95 transition-transform">
+<span class="material-symbols-outlined text-[20px]" data-icon="edit">edit</span>
+</button>
+</div>
+<!-- Identity Info -->
+<div class="flex-1 text-center md:text-left mt-4 md:mt-0 z-10">
+<div class="flex flex-col md:flex-row md:items-center gap-2 mb-2">
+<h2 class="text-headline-lg-mobile md:text-headline-lg font-bold text-on-surface">Sarah Jenkins</h2>
+<span class="inline-flex items-center px-3 py-1 rounded-full bg-secondary-container text-on-secondary-container text-label-sm font-semibold">
+                            #WS-48291
+                        </span>
+</div>
+<p class="text-body-lg text-on-surface-variant font-medium mb-4">Senior Human Resources Specialist</p>
+<div class="flex flex-wrap justify-center md:justify-start gap-3">
+<div class="flex items-center gap-2 px-3 py-2 bg-surface-container-low rounded-lg border border-outline-variant/30">
+<span class="material-symbols-outlined text-primary text-[18px]" data-icon="domain">domain</span>
+<span class="text-body-md font-medium text-on-surface">Operations &amp; HR</span>
+</div>
+<div class="flex items-center gap-2 px-3 py-2 bg-surface-container-low rounded-lg border border-outline-variant/30">
+<span class="material-symbols-outlined text-primary text-[18px]" data-icon="verified_user">verified_user</span>
+<span class="text-body-md font-medium text-on-surface">Full-Time</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Bento Grid for Details & Actions -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-gutter">
+<!-- Personal Details Card -->
+<div class="md:col-span-2 space-y-gutter">
+<div class="bg-surface-container-lowest rounded-xl p-6 shadow-sm border border-outline-variant">
+<h3 class="text-title-md font-bold text-on-surface mb-6 flex items-center gap-2">
+<span class="material-symbols-outlined text-primary" data-icon="contact_page">contact_page</span>
+                        Personal Details
+                    </h3>
+<div class="space-y-4">
+<div class="flex flex-col sm:flex-row sm:items-center justify-between py-3 border-b border-outline-variant/20 last:border-0">
+<span class="text-label-sm text-outline uppercase tracking-wider">Email Address</span>
+<span class="text-body-lg text-on-surface font-medium">sarah.j@enterprise.com</span>
+</div>
+<div class="flex flex-col sm:flex-row sm:items-center justify-between py-3 border-b border-outline-variant/20 last:border-0">
+<span class="text-label-sm text-outline uppercase tracking-wider">Phone Number</span>
+<span class="text-body-lg text-on-surface font-medium">+1 (555) 234-8901</span>
+</div>
+<div class="flex flex-col sm:flex-row sm:items-center justify-between py-3 border-b border-outline-variant/20 last:border-0">
+<span class="text-label-sm text-outline uppercase tracking-wider">Department</span>
+<span class="text-body-lg text-on-surface font-medium">Human Resources</span>
+</div>
+<div class="flex flex-col sm:flex-row sm:items-center justify-between py-3 border-b border-outline-variant/20 last:border-0">
+<span class="text-label-sm text-outline uppercase tracking-wider">Reports To</span>
+<div class="flex items-center gap-2 mt-2 sm:mt-0">
+<div class="w-6 h-6 rounded-full overflow-hidden bg-surface-container-high">
+<img class="w-full h-full object-cover" data-alt="A small circular avatar of a male executive in a formal suit for a business directory. The style is consistent with high-end corporate UI, featuring neutral backgrounds and soft professional lighting. The image represents a high-level manager in a modern enterprise setting with clean, minimalist aesthetics." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCwOmLaTOUzQqMgHmM4vCVTIj6HaqZNaDwJWlfdpswtvX2L4BO6vRo2vMlAjpnLM97Es4twwEMevNHfSPlpG1vfSiLWKhmNTEAm2xKe_8wQOoxSDOO6EbohfJKR21FCAks5BMV9FPT0v8jxMbRMSneDSX301lMRZHZEimsW_auVWQd91mlzw_tjeIqD5ZcJpiiG2ih_6CGmsa_Uvu0gKtqZvC3YZ_sl3lr84eGrfA2ykccUcs_vcg9z"/>
+</div>
+<span class="text-body-lg text-on-surface font-medium">David Sterling (Director)</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Stats/Highlights -->
+<div class="grid grid-cols-2 gap-gutter">
+<div class="bg-primary-container/10 p-6 rounded-xl border border-primary-container/30">
+<p class="text-label-sm text-primary uppercase font-bold mb-1">Leave Balance</p>
+<p class="text-headline-lg font-bold text-primary">18 Days</p>
+</div>
+<div class="bg-secondary-container/20 p-6 rounded-xl border border-secondary-container/30">
+<p class="text-label-sm text-on-secondary-container uppercase font-bold mb-1">Next Shift</p>
+<p class="text-headline-md font-bold text-on-secondary-container">09:00 AM</p>
+</div>
+</div>
+</div>
+<!-- Action Buttons Card -->
+<div class="space-y-gutter">
+<div class="bg-surface-container-lowest rounded-xl p-6 shadow-sm border border-outline-variant">
+<h3 class="text-title-md font-bold text-on-surface mb-6">Account Actions</h3>
+<div class="flex flex-col gap-3">
+<button class="w-full h-12 flex items-center justify-center gap-2 bg-primary text-on-primary rounded-lg font-semibold text-body-md hover:brightness-110 active:scale-95 transition-all">
+<span class="material-symbols-outlined text-[20px]" data-icon="edit_square">edit_square</span>
+                            Edit Profile
+                        </button>
+<button class="w-full h-12 flex items-center justify-center gap-2 bg-secondary-container text-on-secondary-container rounded-lg font-semibold text-body-md hover:bg-secondary-container/80 active:scale-95 transition-all border border-outline-variant/30">
+<span class="material-symbols-outlined text-[20px]" data-icon="lock_reset">lock_reset</span>
+                            Change Password
+                        </button>
+<div class="pt-4 mt-4 border-t border-outline-variant/30">
+<button class="w-full h-12 flex items-center justify-center gap-2 bg-error-container text-on-error-container rounded-lg font-semibold text-body-md hover:brightness-110 active:scale-95 transition-all border border-error/20">
+<span class="material-symbols-outlined text-[20px]" data-icon="logout">logout</span>
+                                Logout
+                            </button>
+</div>
+</div>
+</div>
+<!-- Support Card -->
+<div class="bg-tertiary-container/10 rounded-xl p-6 border border-tertiary-container/30 flex items-center gap-4 group cursor-pointer hover:bg-tertiary-container/20 transition-colors">
+<div class="w-12 h-12 rounded-full bg-tertiary-container/20 flex items-center justify-center text-tertiary">
+<span class="material-symbols-outlined" data-icon="support_agent">support_agent</span>
+</div>
+<div>
+<h4 class="text-body-md font-bold text-on-surface">Need Help?</h4>
+<p class="text-label-sm text-on-surface-variant">Contact IT Support</p>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 right-0 h-20 flex justify-around items-center px-4 pb-safe bg-surface/90 backdrop-blur-xl z-50 shadow-lg border-t border-outline-variant/30">
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary transition-all px-3 py-1" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span class="text-label-sm font-medium mt-1">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary transition-all px-3 py-1" href="#">
+<span class="material-symbols-outlined" data-icon="group">group</span>
+<span class="text-label-sm font-medium mt-1">Staff</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary transition-all px-3 py-1" href="#">
+<span class="material-symbols-outlined" data-icon="event_note">event_note</span>
+<span class="text-label-sm font-medium mt-1">Logs</span>
+</a>
+<a class="flex flex-col items-center justify-center text-primary font-bold bg-primary-container/20 rounded-xl px-4 py-2" href="#">
+<span class="material-symbols-outlined" data-icon="account_circle" style="font-variation-settings: 'FILL' 1;">account_circle</span>
+<span class="text-label-sm mt-1">Admin</span>
+</a>
+</nav>
+<script>
+        // Micro-interaction for buttons
+        document.querySelectorAll('button').forEach(button => {
+            button.addEventListener('mousedown', () => {
+                button.style.transform = 'scale(0.96)';
+            });
+            button.addEventListener('mouseup', () => {
+                button.style.transform = 'scale(1)';
+            });
+            button.addEventListener('mouseleave', () => {
+                button.style.transform = 'scale(1)';
+            });
+        });
+
+        // Simple scroll effect for TopAppBar
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('header');
+            if (window.scrollY > 20) {
+                header.classList.add('shadow-lg', 'bg-surface/95');
+                header.classList.remove('shadow-sm', 'bg-surface/80');
+            } else {
+                header.classList.add('shadow-sm', 'bg-surface/80');
+                header.classList.remove('shadow-lg', 'bg-surface/95');
+            }
+        });
+    </script>
+</body></html>
