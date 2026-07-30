@@ -36,13 +36,11 @@
     "plugins": [
       "expo-router",
       "expo-font",
-      "react-native-vision-camera"
+      "react-native-vision-camera",
+      "expo-asset"
     ],
     "experiments": {
       "typedRoutes": true
-    },
-    "exclude": [
-      "backend/**/*"
-    ]
+    }
   }
 }
