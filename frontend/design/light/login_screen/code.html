@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>WorkSync | Enterprise Login</title>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Google Fonts: Inter -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "tertiary": "#7b2600",
+                    "surface-container-lowest": "#ffffff",
+                    "surface-tint": "#0c56d0",
+                    "on-surface": "#191c1e",
+                    "on-primary": "#ffffff",
+                    "on-secondary-container": "#576377",
+                    "primary-fixed": "#dae2ff",
+                    "secondary-fixed": "#d7e3fb",
+                    "secondary-container": "#d4e0f8",
+                    "inverse-on-surface": "#f0f1f3",
+                    "inverse-primary": "#b2c5ff",
+                    "on-error": "#ffffff",
+                    "on-background": "#191c1e",
+                    "primary": "#003d9b",
+                    "on-secondary-fixed": "#101c2d",
+                    "error": "#ba1a1a",
+                    "on-tertiary-fixed": "#380d00",
+                    "tertiary-fixed": "#ffdbcf",
+                    "primary-container": "#0052cc",
+                    "on-secondary": "#ffffff",
+                    "tertiary-container": "#a33500",
+                    "on-primary-container": "#c4d2ff",
+                    "secondary-fixed-dim": "#bbc7de",
+                    "on-primary-fixed": "#001848",
+                    "surface-container-low": "#f3f4f6",
+                    "surface-bright": "#f8f9fb",
+                    "on-secondary-fixed-variant": "#3b475b",
+                    "on-tertiary": "#ffffff",
+                    "primary-fixed-dim": "#b2c5ff",
+                    "surface-container-high": "#e7e8ea",
+                    "surface-container-highest": "#e1e2e4",
+                    "surface": "#f8f9fb",
+                    "inverse-surface": "#2e3132",
+                    "error-container": "#ffdad6",
+                    "on-tertiary-container": "#ffc6b2",
+                    "on-surface-variant": "#434654",
+                    "secondary": "#535f73",
+                    "on-primary-fixed-variant": "#0040a2",
+                    "on-tertiary-fixed-variant": "#812800",
+                    "background": "#f8f9fb",
+                    "tertiary-fixed-dim": "#ffb59b",
+                    "surface-variant": "#e1e2e4",
+                    "outline": "#737685",
+                    "surface-container": "#edeef0",
+                    "on-error-container": "#93000a",
+                    "surface-dim": "#d9dadc",
+                    "outline-variant": "#c3c6d6"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "base": "4px",
+                    "margin-desktop": "48px",
+                    "gutter": "16px",
+                    "lg": "24px",
+                    "xl": "32px",
+                    "md": "16px",
+                    "sm": "8px",
+                    "xs": "4px",
+                    "margin-mobile": "16px"
+            },
+            "fontFamily": {
+                    "headline-lg": ["Inter"],
+                    "label-md": ["Inter"],
+                    "headline-lg-mobile": ["Inter"],
+                    "code-sm": ["Inter"],
+                    "body-md": ["Inter"],
+                    "body-lg": ["Inter"],
+                    "headline-md": ["Inter"]
+            },
+            "fontSize": {
+                    "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "label-md": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                    "headline-lg-mobile": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                    "code-sm": ["12px", {"lineHeight": "16px", "fontWeight": "500"}],
+                    "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                    "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "headline-md": ["20px", {"lineHeight": "28px", "fontWeight": "600"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #F4F5F7; /* Level 0 Base from style guide */
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-nav {
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+        }
+        /* Custom Checkbox Styling to match Primary Blue */
+        input[type="checkbox"]:checked {
+            background-color: #003d9b;
+            border-color: #003d9b;
+        }
+        .error-shake {
+            animation: shake 0.4s cubic-bezier(.36,.07,.19,.97) both;
+        }
+        @keyframes shake {
+            10%, 90% { transform: translate3d(-1px, 0, 0); }
+            20%, 80% { transform: translate3d(2px, 0, 0); }
+            30%, 50%, 70% { transform: translate3d(-4px, 0, 0); }
+            40%, 60% { transform: translate3d(4px, 0, 0); }
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+</head>
+<body class="bg-background text-on-surface min-h-screen flex flex-col">
+<!-- Subtle Background Shader for Atmosphere -->
+<div class="fixed inset-0 z-0 opacity-40 pointer-events-none">
+
+</div>
+<!-- Main Content Canvas -->
+<main class="flex-grow flex flex-col items-center justify-center px-margin-mobile md:px-0 z-10 py-xl">
+<!-- Login Container -->
+<div class="w-full max-w-[440px] bg-surface-container-lowest rounded-xl shadow-[0_2px_8px_rgba(0,0,0,0.04)] border border-outline-variant/30 p-lg md:p-xl transition-all duration-300">
+<!-- Brand Identity -->
+<div class="flex flex-col items-center mb-xl">
+<div class="w-14 h-14 bg-primary rounded-xl flex items-center justify-center mb-md shadow-md">
+<span class="material-symbols-outlined text-on-primary text-[32px]" style="font-variation-settings: 'FILL' 1;">sync_alt</span>
+</div>
+<h1 class="text-primary font-headline-md text-headline-md tracking-tight">WorkSync</h1>
+<p class="text-on-surface-variant font-body-md text-body-md mt-xs">Enterprise Attendance Portal</p>
+</div>
+<!-- Login Form -->
+<form class="space-y-lg" id="loginForm" onsubmit="return handleLogin(event)">
+<!-- Employee ID Field -->
+<div class="space-y-xs">
+<label class="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider block ml-1" for="employeeId">
+                        Employee ID
+                    </label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-outline">badge</span>
+<input class="w-full h-[52px] pl-12 pr-4 bg-surface rounded-xl border border-outline-variant focus:border-primary focus:ring-2 focus:ring-primary/10 transition-all font-body-md text-body-md outline-none" id="employeeId" placeholder="Enter your ID" required="" type="text"/>
+</div>
+</div>
+<!-- Password Field -->
+<div class="space-y-xs">
+<div class="flex justify-between items-center px-1">
+<label class="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider" for="password">
+                            Password
+                        </label>
+<a class="text-primary font-label-md text-label-md hover:underline decoration-2 underline-offset-4" href="#">Forgot?</a>
+</div>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-outline">lock</span>
+<input class="w-full h-[52px] pl-12 pr-12 bg-surface rounded-xl border border-outline-variant focus:border-primary focus:ring-2 focus:ring-primary/10 transition-all font-body-md text-body-md outline-none" id="password" placeholder="••••••••" required="" type="password"/>
+<button class="absolute right-4 top-1/2 -translate-y-1/2 text-outline hover:text-on-surface transition-colors" onclick="togglePassword()" type="button">
+<span class="material-symbols-outlined" id="passwordIcon">visibility</span>
+</button>
+</div>
+</div>
+<!-- Validation Hint (Hidden by default) -->
+<div class="hidden flex items-start gap-2 p-md bg-error-container/30 border border-error/10 rounded-lg animate-in fade-in slide-in-from-top-1" id="errorMessage">
+<span class="material-symbols-outlined text-error text-[20px]">error</span>
+<p class="text-on-error-container font-body-md text-body-md">Invalid credentials. Please verify your Employee ID and try again.</p>
+</div>
+<!-- Remember Me & Policy -->
+<div class="flex items-center justify-between py-xs">
+<label class="flex items-center cursor-pointer group">
+<input class="w-5 h-5 rounded border-outline-variant text-primary focus:ring-primary/20 transition-all" type="checkbox"/>
+<span class="ml-3 font-body-md text-body-md text-on-surface-variant group-hover:text-on-surface transition-colors">Remember Me</span>
+</label>
+</div>
+<!-- Action Button -->
+<button class="w-full h-12 bg-primary text-on-primary rounded-xl font-headline-md text-body-lg font-semibold shadow-md hover:bg-primary-container active:scale-[0.98] transition-all duration-200 flex items-center justify-center gap-2" type="submit">
+                    Login
+                    <span class="material-symbols-outlined">login</span>
+</button>
+</form>
+<!-- SSO / Alternative Options -->
+<div class="mt-xl pt-lg border-t border-outline-variant/30 text-center">
+<p class="font-label-md text-label-md text-outline uppercase tracking-widest mb-md">Or Sign In With</p>
+<div class="grid grid-cols-2 gap-md">
+<button class="flex items-center justify-center h-12 border border-outline-variant rounded-xl bg-surface hover:bg-surface-container-high transition-colors font-body-md font-semibold text-on-surface-variant">
+                        Microsoft
+                    </button>
+<button class="flex items-center justify-center h-12 border border-outline-variant rounded-xl bg-surface hover:bg-surface-container-high transition-colors font-body-md font-semibold text-on-surface-variant">
+                        Okta
+                    </button>
+</div>
+</div>
+</div>
+<!-- Support Link -->
+<p class="mt-lg font-body-md text-body-md text-on-surface-variant">
+            Need help? <a class="text-primary font-semibold hover:underline" href="#">Contact HR Support</a>
+</p>
+</main>
+<!-- Footer Area (Decorative) -->
+<footer class="py-lg px-margin-mobile text-center">
+<p class="font-label-md text-label-md text-outline">
+            © 2024 WorkSync Enterprise Solutions. All rights reserved.
+        </p>
+</footer>
+<!-- Micro-interactions Script -->
+<script>
+        function togglePassword() {
+            const passwordInput = document.getElementById('password');
+            const icon = document.getElementById('passwordIcon');
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                icon.innerText = 'visibility_off';
+            } else {
+                passwordInput.type = 'password';
+                icon.innerText = 'visibility';
+            }
+        }
+
+        function handleLogin(e) {
+            e.preventDefault();
+            const btn = e.target.querySelector('button[type="submit"]');
+            const errorDiv = document.getElementById('errorMessage');
+            const formContainer = btn.closest('.bg-surface-container-lowest');
+            
+            // Loading State
+            const originalContent = btn.innerHTML;
+            btn.innerHTML = '<span class="material-symbols-outlined animate-spin">progress_activity</span> Authenticating...';
+            btn.disabled = true;
+
+            // Simulate Network delay
+            setTimeout(() => {
+                // Show error state for demonstration
+                btn.innerHTML = originalContent;
+                btn.disabled = false;
+                errorDiv.classList.remove('hidden');
+                formContainer.classList.add('error-shake');
+                
+                // Clear shake after animation
+                setTimeout(() => {
+                    formContainer.classList.remove('error-shake');
+                }, 500);
+            }, 1200);
+
+            return false;
+        }
+
+        // Add focus effect for inputs
+        document.querySelectorAll('input').forEach(input => {
+            input.addEventListener('focus', () => {
+                input.parentElement.querySelector('.material-symbols-outlined').style.color = '#003d9b';
+            });
+            input.addEventListener('blur', () => {
+                input.parentElement.querySelector('.material-symbols-outlined').style.color = '#737685';
+            });
+        });
+    </script>
+</body></html>

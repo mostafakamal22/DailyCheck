@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>WorkSync - Employee Home</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "tertiary": "#7b2600",
+                    "surface-container-lowest": "#ffffff",
+                    "surface-tint": "#0c56d0",
+                    "on-surface": "#191c1e",
+                    "on-primary": "#ffffff",
+                    "on-secondary-container": "#576377",
+                    "primary-fixed": "#dae2ff",
+                    "secondary-fixed": "#d7e3fb",
+                    "secondary-container": "#d4e0f8",
+                    "inverse-on-surface": "#f0f1f3",
+                    "inverse-primary": "#b2c5ff",
+                    "on-error": "#ffffff",
+                    "on-background": "#191c1e",
+                    "primary": "#003d9b",
+                    "on-secondary-fixed": "#101c2d",
+                    "error": "#ba1a1a",
+                    "on-tertiary-fixed": "#380d00",
+                    "tertiary-fixed": "#ffdbcf",
+                    "primary-container": "#0052cc",
+                    "on-secondary": "#ffffff",
+                    "tertiary-container": "#a33500",
+                    "on-primary-container": "#c4d2ff",
+                    "secondary-fixed-dim": "#bbc7de",
+                    "on-primary-fixed": "#001848",
+                    "surface-container-low": "#f3f4f6",
+                    "surface-bright": "#f8f9fb",
+                    "on-secondary-fixed-variant": "#3b475b",
+                    "on-tertiary": "#ffffff",
+                    "primary-fixed-dim": "#b2c5ff",
+                    "surface-container-high": "#e7e8ea",
+                    "surface-container-highest": "#e1e2e4",
+                    "surface": "#f8f9fb",
+                    "inverse-surface": "#2e3132",
+                    "error-container": "#ffdad6",
+                    "on-tertiary-container": "#ffc6b2",
+                    "on-surface-variant": "#434654",
+                    "secondary": "#535f73",
+                    "on-primary-fixed-variant": "#0040a2",
+                    "on-tertiary-fixed-variant": "#812800",
+                    "background": "#f8f9fb",
+                    "tertiary-fixed-dim": "#ffb59b",
+                    "surface-variant": "#e1e2e4",
+                    "outline": "#737685",
+                    "surface-container": "#edeef0",
+                    "on-error-container": "#93000a",
+                    "surface-dim": "#d9dadc",
+                    "outline-variant": "#c3c6d6"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "base": "4px",
+                    "margin-desktop": "48px",
+                    "gutter": "16px",
+                    "lg": "24px",
+                    "xl": "32px",
+                    "md": "16px",
+                    "sm": "8px",
+                    "xs": "4px",
+                    "margin-mobile": "16px"
+            },
+            "fontFamily": {
+                    "headline-lg": ["Inter"],
+                    "label-md": ["Inter"],
+                    "headline-lg-mobile": ["Inter"],
+                    "code-sm": ["Inter"],
+                    "body-md": ["Inter"],
+                    "body-lg": ["Inter"],
+                    "headline-md": ["Inter"]
+            },
+            "fontSize": {
+                    "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "label-md": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                    "headline-lg-mobile": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                    "code-sm": ["12px", {"lineHeight": "16px", "fontWeight": "500"}],
+                    "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                    "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "headline-md": ["20px", {"lineHeight": "28px", "fontWeight": "600"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body {
+            font-family: 'Inter', sans-serif;
+            -webkit-font-smoothing: antialiased;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-header {
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+        }
+        .tonal-shadow {
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+        }
+        .active-tab-glow {
+            box-shadow: 0 0 12px rgba(0, 61, 155, 0.1);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-surface min-h-screen pb-24">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 backdrop-blur-xl bg-surface/80 shadow-sm glass-header">
+<div class="flex justify-between items-center h-16 px-margin-mobile md:px-margin-desktop max-w-7xl mx-auto">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-secondary-container flex items-center justify-center overflow-hidden border border-outline-variant/30">
+<img class="w-full h-full object-cover" data-alt="A professional high-resolution headshot of a smiling employee for a corporate ID, set against a soft, out-of-focus modern office background with blue and gray color tones. The lighting is soft and professional, capturing a clean, minimalist enterprise aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBjRy90ZbeCwYoRQOe16p9-sWmpoRxdh49VuPgkVcK3E3xcRUi-QT66ZuLggnA8bQMMnNF7ADrShW_FAXcoY12huyaEiBB59oPJmWueSKqnNUMwmx6w7TjsD6ABwmIz69TjELtWIFL6mV0E2-QdQJ8SvI06WmwVd-eQyK65q65wa2SYA2yios1veYza938Ay30t3OPep5zOzTBVlxTLkvGQjka8Go5EjUTYgcnk2X4PAmCqv6sX9Qb6"/>
+</div>
+<div class="flex flex-col">
+<span class="text-primary font-headline-md text-headline-md font-bold tracking-tight">WorkSync</span>
+</div>
+</div>
+<button class="w-10 h-10 rounded-full flex items-center justify-center text-on-surface-variant hover:bg-surface-container-high/50 transition-colors active:scale-95">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+</div>
+</header>
+<main class="pt-24 px-margin-mobile md:px-margin-desktop max-w-7xl mx-auto space-y-lg">
+<!-- Welcome Section -->
+<section class="animate-in fade-in slide-in-from-bottom-4 duration-700">
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile text-on-surface">Welcome back, Sarah</h1>
+<p class="font-body-md text-body-md text-on-surface-variant">Employee ID: #WS-48291</p>
+</section>
+<!-- Status Card -->
+<section class="grid grid-cols-1 md:grid-cols-12 gap-gutter">
+<div class="md:col-span-12 bg-surface-container-lowest rounded-xl p-lg border border-outline-variant/30 tonal-shadow relative overflow-hidden group">
+<div class="absolute top-0 right-0 p-4">
+<span class="font-label-md text-label-md px-3 py-1 bg-error-container text-on-error-container rounded-full uppercase">Not Checked In</span>
+</div>
+<div class="space-y-sm">
+<p class="font-label-md text-label-md text-outline uppercase tracking-wider" id="current-date">October 24, 2023</p>
+<div class="flex items-baseline gap-2">
+<span class="font-headline-lg text-headline-lg" id="current-time">08:45</span>
+<span class="font-body-md text-body-md text-on-surface-variant">AM</span>
+</div>
+</div>
+<div class="mt-lg flex items-center gap-2 text-on-surface-variant">
+<span class="material-symbols-outlined text-[20px]" data-icon="location_on">location_on</span>
+<span class="font-body-md text-body-md">HQ - Main Campus, North Block</span>
+</div>
+</div>
+</section>
+<!-- Quick Actions -->
+<section class="grid grid-cols-2 md:grid-cols-4 gap-gutter">
+<button class="flex flex-col items-center justify-center p-xl bg-primary text-on-primary rounded-xl tonal-shadow hover:brightness-110 active:scale-[0.97] transition-all gap-sm">
+<div class="w-12 h-12 rounded-full bg-white/20 flex items-center justify-center">
+<span class="material-symbols-outlined text-[28px]" data-icon="login" style="font-variation-settings: 'FILL' 1;">login</span>
+</div>
+<span class="font-label-md text-label-md font-semibold">Check In</span>
+</button>
+<button class="flex flex-col items-center justify-center p-xl bg-surface-container-high text-on-surface rounded-xl tonal-shadow hover:bg-surface-container-highest active:scale-[0.97] transition-all gap-sm opacity-50 cursor-not-allowed">
+<div class="w-12 h-12 rounded-full bg-on-surface/5 flex items-center justify-center">
+<span class="material-symbols-outlined text-[28px]" data-icon="logout">logout</span>
+</div>
+<span class="font-label-md text-label-md font-semibold">Check Out</span>
+</button>
+<div class="hidden md:flex flex-col items-center justify-center p-xl bg-surface-container-lowest text-on-surface rounded-xl border border-outline-variant/30 tonal-shadow gap-sm cursor-pointer hover:bg-surface-container-low transition-colors">
+<div class="w-12 h-12 rounded-full bg-secondary-container/30 text-secondary flex items-center justify-center">
+<span class="material-symbols-outlined text-[28px]" data-icon="event_busy">event_busy</span>
+</div>
+<span class="font-label-md text-label-md font-semibold text-center">Request Leave</span>
+</div>
+<div class="hidden md:flex flex-col items-center justify-center p-xl bg-surface-container-lowest text-on-surface rounded-xl border border-outline-variant/30 tonal-shadow gap-sm cursor-pointer hover:bg-surface-container-low transition-colors">
+<div class="w-12 h-12 rounded-full bg-tertiary-fixed/30 text-tertiary flex items-center justify-center">
+<span class="material-symbols-outlined text-[28px]" data-icon="history">history</span>
+</div>
+<span class="font-label-md text-label-md font-semibold text-center">View History</span>
+</div>
+</section>
+<!-- Attendance Summary -->
+<section class="space-y-md pb-8">
+<div class="flex justify-between items-center px-1">
+<h2 class="font-headline-md text-headline-md text-on-surface">Recent Logs</h2>
+<button class="text-primary font-label-md text-label-md">View All</button>
+</div>
+<div class="space-y-sm">
+<!-- Log Entry 1 -->
+<div class="flex items-center justify-between p-md bg-surface-container-lowest border border-outline-variant/20 rounded-xl hover:bg-surface-container-low transition-colors group">
+<div class="flex items-center gap-md">
+<div class="w-10 h-10 rounded-lg bg-secondary-container/50 text-on-secondary-container flex items-center justify-center">
+<span class="material-symbols-outlined" data-icon="calendar_today">calendar_today</span>
+</div>
+<div>
+<p class="font-body-lg text-body-lg font-semibold text-on-surface">Yesterday, Oct 23</p>
+<p class="font-body-md text-body-md text-on-surface-variant">09:02 AM — 06:15 PM</p>
+</div>
+</div>
+<div class="text-right">
+<p class="font-body-lg text-body-lg font-bold text-on-surface">09h 13m</p>
+<span class="font-label-md text-label-md text-primary bg-primary-container/10 px-2 py-0.5 rounded">Present</span>
+</div>
+</div>
+<!-- Log Entry 2 -->
+<div class="flex items-center justify-between p-md bg-surface-container-lowest border border-outline-variant/20 rounded-xl hover:bg-surface-container-low transition-colors">
+<div class="flex items-center gap-md">
+<div class="w-10 h-10 rounded-lg bg-secondary-container/50 text-on-secondary-container flex items-center justify-center">
+<span class="material-symbols-outlined" data-icon="calendar_today">calendar_today</span>
+</div>
+<div>
+<p class="font-body-lg text-body-lg font-semibold text-on-surface">Friday, Oct 20</p>
+<p class="font-body-md text-body-md text-on-surface-variant">08:55 AM — 05:45 PM</p>
+</div>
+</div>
+<div class="text-right">
+<p class="font-body-lg text-body-lg font-bold text-on-surface">08h 50m</p>
+<span class="font-label-md text-label-md text-primary bg-primary-container/10 px-2 py-0.5 rounded">Present</span>
+</div>
+</div>
+<!-- Log Entry 3 -->
+<div class="flex items-center justify-between p-md bg-surface-container-lowest border border-outline-variant/20 rounded-xl hover:bg-surface-container-low transition-colors">
+<div class="flex items-center gap-md">
+<div class="w-10 h-10 rounded-lg bg-secondary-container/50 text-on-secondary-container flex items-center justify-center">
+<span class="material-symbols-outlined" data-icon="calendar_today">calendar_today</span>
+</div>
+<div>
+<p class="font-body-lg text-body-lg font-semibold text-on-surface">Thursday, Oct 19</p>
+<p class="font-body-md text-body-md text-on-surface-variant">No entry recorded</p>
+</div>
+</div>
+<div class="text-right">
+<p class="font-body-lg text-body-lg font-bold text-error">--</p>
+<span class="font-label-md text-label-md text-error bg-error-container/20 px-2 py-0.5 rounded">Absent</span>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 right-0 h-20 bg-surface/80 backdrop-blur-xl flex justify-around items-center px-4 pb-safe z-50 shadow-lg md:hidden">
+<a class="flex flex-col items-center justify-center text-primary font-semibold bg-primary-container/20 rounded-xl px-3 py-1 scale-[0.95] active-tab-glow transition-all duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard" style="font-variation-settings: 'FILL' 1;">dashboard</span>
+<span class="font-label-md text-label-md">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-variant/40 transition-colors p-2 rounded-xl" href="#">
+<span class="material-symbols-outlined" data-icon="event_note">event_note</span>
+<span class="font-label-md text-label-md">Attendance</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-variant/40 transition-colors p-2 rounded-xl" href="#">
+<span class="material-symbols-outlined" data-icon="account_circle">account_circle</span>
+<span class="font-label-md text-label-md">Profile</span>
+</a>
+</nav>
+<!-- Desktop Sidebar (Hidden on mobile) -->
+<aside class="hidden md:flex fixed left-0 top-16 bottom-0 w-[280px] bg-surface-container-low flex-col py-lg border-r border-outline-variant/20">
+<div class="px-4 mb-xl">
+<div class="p-md bg-primary-container/10 rounded-xl flex items-center gap-3">
+<div class="w-12 h-12 rounded-full overflow-hidden border-2 border-white">
+<img class="w-full h-full object-cover" data-alt="A clean professional avatar of a female corporate employee for an HR dashboard software. She has a warm expression and is wearing modern business casual attire. The image is bright with high-key lighting and a soft neutral studio background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAGQGQF5eag9P-rcaOEYgWu4QCZ_XQ-cK6QpuMaCMG6zW_Q7vdmZTgUtbSPDbViDetlsER7aSCJLFn4L63RQrkDKmkr5LYjbnQXlU4NLiLBXQFUlEwS9WeLdLS11iH_DA5irpEb6lu2i5TKK_qvzWwTZfpLpDY87Y5UsInk0chlAMfiIB7L59TtDhH6f9i0hvaM3P1xQ23koIv3KjXORZWaCEfAhHy5WruRlFUOeTJOJ6b5zC8olqv1"/>
+</div>
+<div>
+<p class="font-headline-md text-headline-md text-primary">Sarah Miller</p>
+<p class="font-body-md text-body-md text-on-surface-variant">HR Specialist</p>
+</div>
+</div>
+</div>
+<nav class="flex flex-col">
+<a class="bg-secondary-container text-on-secondary-container font-semibold rounded-full mx-2 my-1 px-4 py-3 flex items-center gap-3 opacity-80" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard" style="font-variation-settings: 'FILL' 1;">dashboard</span>
+<span class="font-body-md text-body-md">Home</span>
+</a>
+<a class="text-on-surface-variant hover:bg-surface-container-high transition-colors rounded-full mx-2 my-1 px-4 py-3 flex items-center gap-3" href="#">
+<span class="material-symbols-outlined" data-icon="event_note">event_note</span>
+<span class="font-body-md text-body-md">Attendance Logs</span>
+</a>
+<a class="text-on-surface-variant hover:bg-surface-container-high transition-colors rounded-full mx-2 my-1 px-4 py-3 flex items-center gap-3" href="#">
+<span class="material-symbols-outlined" data-icon="calendar_month">calendar_month</span>
+<span class="font-body-md text-body-md">Schedules</span>
+</a>
+<a class="text-on-surface-variant hover:bg-surface-container-high transition-colors rounded-full mx-2 my-1 px-4 py-3 flex items-center gap-3" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span class="font-body-md text-body-md">Settings</span>
+</a>
+</nav>
+</aside>
+<script>
+        // Update Time script
+        function updateTime() {
+            const timeElement = document.getElementById('current-time');
+            const dateElement = document.getElementById('current-date');
+            const now = new Date();
+            
+            const hours = String(now.getHours() % 12 || 12).padStart(2, '0');
+            const minutes = String(now.getMinutes()).padStart(2, '0');
+            const ampm = now.getHours() >= 12 ? 'PM' : 'AM';
+            
+            timeElement.textContent = `${hours}:${minutes}`;
+            
+            const options = { month: 'long', day: 'numeric', year: 'numeric' };
+            dateElement.textContent = now.toLocaleDateString('en-US', options);
+        }
+
+        setInterval(updateTime, 1000);
+        updateTime();
+
+        // Simple button interaction
+        document.querySelectorAll('button').forEach(btn => {
+            btn.addEventListener('click', function() {
+                if (!this.classList.contains('cursor-not-allowed')) {
+                    this.style.transform = 'scale(0.95)';
+                    setTimeout(() => {
+                        this.style.transform = '';
+                    }, 150);
+                }
+            });
+        });
+    </script>
+</body></html>
